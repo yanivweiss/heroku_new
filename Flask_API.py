@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, make_response
 import joblib
 import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -54,5 +55,5 @@ if __name__ == "__main__":
 
     model = joblib.load("model_wine.pkl")  # Load "model.pkl"
     print("Model loaded")
-
-    app.run(debug=True, use_reloader=True)
+    port = os.environ.get('PORT')
+    app.run(host='0.0.0.0', port=int(port) , debug=True, use_reloader=True)
