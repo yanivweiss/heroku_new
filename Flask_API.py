@@ -44,10 +44,7 @@ def predict_multi():
             return make_response(jsonify({"message": "Request body must be JSON"}), 400)
 
 if __name__ == "__main__":
-    app.jinja_env.cache = {}
-    app.jinja_env.auto_reload = True
-    app.config["TEMPLATES_AUTO_RELOAD"] = True
 
     model = joblib.load("model_wine.pkl")  # Load "model.pkl"
     port = os.environ.get('PORT')
-    app.run(host='0.0.0.0', port=int(port) , debug=True, use_reloader=True)
+    app.run(host='0.0.0.0', port=int(port))
