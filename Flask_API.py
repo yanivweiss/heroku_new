@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, make_response
 import joblib
-import traceback
 import pandas as pd
 
 app = Flask(__name__)
