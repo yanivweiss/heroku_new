@@ -24,15 +24,11 @@ def predict_single():
 
 @app.route("/json", methods=["POST"])
 def predict_multi():
-        print(request.is_json)
         if request.is_json:
 
             req = request.get_json()
-            print(req)
             query = pd.json_normalize(req)
-            print(query)
             prediction = list(model.predict(query))
-            print(prediction)
 
             response_body = {
                 "message": "JSON received!",
@@ -40,7 +36,6 @@ def predict_multi():
             }
 
             res = make_response(jsonify(response_body), 200)
-            print(res)
 
             return res
 
@@ -54,6 +49,5 @@ if __name__ == "__main__":
     app.config["TEMPLATES_AUTO_RELOAD"] = True
 
     model = joblib.load("model_wine.pkl")  # Load "model.pkl"
-    print("Model loaded")
     port = os.environ.get('PORT')
     app.run(host='0.0.0.0', port=int(port) , debug=True, use_reloader=True)
